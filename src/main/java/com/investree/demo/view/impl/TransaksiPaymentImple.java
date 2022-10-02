@@ -1,4 +1,3 @@
-
 package com.investree.demo.view.Impl;
 
 import java.util.HashMap;
@@ -15,7 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TransaksiPaymentImple implements TransaksiService {
+public class TransaksiPaymentImple implements TransaksiService{
+
     @Autowired
     private TransaksiRepository transaksiRepository;
 
@@ -42,7 +42,7 @@ public class TransaksiPaymentImple implements TransaksiService {
     }
 
     @Override
-    public Map<Integer, Transaksi> updateStatus(Long transaksiId) {
+    public Map<Integer, Transaksi> update(Long transaksiId) {
         Transaksi transaksi = transaksiRepository.findById(transaksiId).orElseThrow();
         transaksi.setStatus("LUNAS");
         transaksiRepository.save(transaksi);
@@ -50,6 +50,15 @@ public class TransaksiPaymentImple implements TransaksiService {
         Map<Integer, Transaksi> map = new HashMap<>();
         map.put(1, transaksi);
         return map;
+    }
+
+
+    @Override
+    public Page<Transaksi> list(int page, int size, String status) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Transaksi> transaksis;
+        transaksis = transaksiRepository.findAll(pageable);
+        return transaksis;
     }
 
 }
