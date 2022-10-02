@@ -23,7 +23,7 @@ public class Users implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    
     private Long id;
 
     @OneToMany(mappedBy = "peminjam")
@@ -37,10 +37,10 @@ public class Users implements Serializable{
 
     @Column(name = "username")
     private String username;
-
+    
     @Column(name = "password")
     private String password;
-
+    
     @Column(name = "is_active")
     private Boolean is_active;
 }
